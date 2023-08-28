@@ -57,10 +57,10 @@ def add_commendation(name, subject_title):
 def get_child(name):
 	try:
 		child = Schoolkid.objects.get(full_name__contains=name)
-	except ObjectDoesNotExist:
+	except Schoolkid.DoesNotExist:
 		print("Такой ученик не найден. Проверьте и введите полное имя")
 		return
-	except MultipleObjectsReturned:
+	except Schoolkid.MultipleObjectsReturned:
 		print("Найдено несколько учеников. Проверьте и введите полное имя")
 		return
 	return child
