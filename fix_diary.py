@@ -10,10 +10,7 @@ from datacenter.models import Commendation
 
 def fix_marks(name):
 	child = get_child(name)
-	bad_marks = Mark.objects.filter(schoolkid=child, points__lt=4)
-	for bad_mark in bad_marks:
-		bad_mark.points = 5
-		bad_mark.save()
+	Mark.objects.filter(schoolkid=child, points__lt=4).update(points=5)
 
 
 def remove_chastisements(name):
