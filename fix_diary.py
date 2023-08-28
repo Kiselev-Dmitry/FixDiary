@@ -7,6 +7,24 @@ from datacenter.models import Chastisement
 from datacenter.models import Lesson
 from datacenter.models import Commendation
 
+COMMENDATION_VARIANTS = [
+	"Отлично!",
+	"Гораздо лучше, чем я ожидал!",
+	"Великолепно!",
+	"Ты меня очень обрадовал!",
+	"Сказано здорово – просто и ясно!",
+	"Очень хороший ответ!",
+	"Ты сегодня прыгнул выше головы!",
+	"Уже существенно лучше!",
+	"Замечательно!",
+	"Так держать!",
+	"Здорово!",
+	"Я тобой горжусь!",
+	"Мы с тобой не зря поработали!",
+	"Ты растешь над собой!",
+	"Теперь у тебя точно все получится!"
+]
+
 
 def fix_marks(name):
 	child = get_child(name)
@@ -21,31 +39,14 @@ def remove_chastisements(name):
 
 def add_commendation(name, subject_title):
 	child = get_child(name)
-	commendation_variants = [
-		"Отлично!",
-		"Гораздо лучше, чем я ожидал!",
-		"Великолепно!",
-		"Ты меня очень обрадовал!",
-		"Сказано здорово – просто и ясно!",
-		"Очень хороший ответ!",
-		"Ты сегодня прыгнул выше головы!",
-		"Уже существенно лучше!",
-		"Замечательно!",
-		"Так держать!",
-		"Здорово!",
-		"Я тобой горжусь!",
-		"Мы с тобой не зря поработали!",
-		"Ты растешь над собой!",
-		"Теперь у тебя точно все получится!"
-	]
-	try:
+		try:
 		lessons = Lesson.objects.get(subject__title=subject_title, year_of_study=6, group_letter="А")
 	except ObjectDoesNotExist:
 		print("Такой предмет не найден. Проверьте правильность и повторите ввод")
 		return
 	last_lesson = lessons.last()
 	Commendation.objects.create(
-		text=random.choice(commendation_variants),
+		text=random.choice(COMMENDATION_VARIANTS),
 		created=last_lesson.date,
 		schoolkid=child,
 		subject=last_lesson.subject,
