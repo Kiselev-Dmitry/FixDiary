@@ -39,9 +39,9 @@ def remove_chastisements(name):
 
 def add_commendation(name, subject_title):
 	child = get_child(name)
-		try:
+	try:
 		lessons = Lesson.objects.get(subject__title=subject_title, year_of_study=6, group_letter="А")
-	except ObjectDoesNotExist:
+	except Lesson.DoesNotExist:
 		print("Такой предмет не найден. Проверьте правильность и повторите ввод")
 		return
 	last_lesson = lessons.last()
