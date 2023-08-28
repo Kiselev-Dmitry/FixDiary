@@ -21,7 +21,7 @@ def remove_chastisements(name):
 
 def add_commendation(name, subject_title):
 	child = get_child(name)
-	text_variants = [
+	commendation_variants = [
 		"Отлично!",
 		"Гораздо лучше, чем я ожидал!",
 		"Великолепно!",
@@ -45,7 +45,7 @@ def add_commendation(name, subject_title):
 		return
 	last_lesson = lessons.last()
 	Commendation.objects.create(
-		text=random.choice(text_variants),
+		text=random.choice(commendation_variants),
 		created=last_lesson.date,
 		schoolkid=child,
 		subject=last_lesson.subject,
