@@ -58,9 +58,7 @@ def get_child(name):
 	try:
 		child = Schoolkid.objects.get(full_name__contains=name)
 	except Schoolkid.DoesNotExist:
-		print("Такой ученик не найден. Проверьте и введите полное имя")
-		return
+		raise Schoolkid.DoesNotExist("Такой ученик не найден. Проверьте и введите полное имя")
 	except Schoolkid.MultipleObjectsReturned:
-		print("Найдено несколько учеников. Проверьте и введите полное имя")
-		return
+		raise Schoolkid.MultipleObjectsReturnedt("Такой ученик не найден. Проверьте и введите полное имя")
 	return child
